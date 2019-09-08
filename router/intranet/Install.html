@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>mobile app install url</title>
+    <script type="text/javascript">
+        // 获取终端的相关信息 
+        var terminal = {
+            // 辨别移动终端类型 
+            platform: function () {
+                var u = navigator.userAgent;
+                return {
+                    // android终端或者uc浏览器 
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+                    // 是否为iPhone或者iPad 
+                    ios: u.indexOf('iPhone') > -1 || u.indexOf('iPad') > -1,
+                    //iOS版本
+                    v8_0: Boolean(u.match(/OS [8-9]_\d[_\d]* like Mac OS X/i)),
+                    v7_1: Boolean(u.match(/OS 7_[1-9][_\d]* like Mac OS X/i)),
+                    v7_0: Boolean(u.match(/OS 7_0[_\d]* like Mac OS X/i)),
+                    v6_0: Boolean(u.match(/OS 6_\d[_\d]* like Mac OS X/i))
+                };
+            }(),
+        }
+
+        // 根据不同的终端，跳转到不同的地址 
+        var url = '';
+        if (terminal.platform.android) {
+            url = 'http://mobile.shsict.com/intranet/Shsict.apk';
+        } else if (terminal.platform.ios) {
+            url = 'itms-services://?action=download-manifest&url=https://mobile.shsict.com/intranet/sdin.plist';
+        }
+
+        if (url != '') {
+            window.location.href = url;
+        } else {
+            alert("Sorry, no App can be matched");
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

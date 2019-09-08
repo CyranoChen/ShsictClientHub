@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>mobile app handler</title>
+    <script type="text/javascript">
+        // 获取终端的相关信息 
+        var terminal = {
+            // 辨别移动终端类型 
+            platform: function () {
+                var u = navigator.userAgent;
+                return {
+                    // android终端或者uc浏览器 
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+                    // 是否为iPhone或者iPad 
+                    ios: u.indexOf('iPhone') > -1,
+                    //iPhone版本
+                    v6_9: Boolean(u.match(/OS [6-9]_\d[_\d]* like Mac OS X/i)),
+                    v10_0: Boolean(u.match(/OS 10_\d[_\d]* like Mac OS X/i))
+                };
+            }(),
+        }
+
+        // 根据不同的终端，跳转到不同的地址 
+        var url = '';
+        if (terminal.platform.android) {
+            url = 'https://mobile.shsict.com/internet/Shsict.apk';
+        } else if (terminal.platform.ios) {
+            // url = 'https://itunes.apple.com/us/app/sheng-dong-xin-xi-cha-xun/id863871519?l=zh&ls=1&mt=8t';
+        }
+        
+        if (url != '') {
+            window.location.href = url;
+        } else {
+            alert("Sorry, no App can be matched");
+        }
+    </script>
+</head>
+
+<body></body>
+
+</html>
